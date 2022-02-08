@@ -46,7 +46,7 @@ plugins {
   id 'elasticsearch.run'
   id 'elasticsearch.release-tools'
   id 'elasticsearch.versions'
-}
+id "org.sonarqube" version "3.3"}
 
 /**
  * This is a convenient method for declaring test artifact dependencies provided by the internal
@@ -438,4 +438,11 @@ tasks.register("spotlessApply").configure {
   dependsOn gradle.includedBuild('build-tools').task(':spotlessApply')
   dependsOn gradle.includedBuild('build-tools').task(':reaper:spotlessApply')
   dependsOn gradle.includedBuild('build-tools-internal').task(':spotlessApply')
+}
+sonarqube {
+  properties {
+    property "sonar.projectKey", "ouzounidis_elasticsearch"
+    property "sonar.organization", "ouzounidis"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
 }
